@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/jonat/Documents/School/Spring 2021/CSCI404/Project2/Board.h
+string
+-
+array
+-
+fstream
+-
+iostream
+-
+
+C:/Users/jonat/Documents/School/Spring 2021/CSCI404/Project2/Game.cpp
+Game.h
+C:/Users/jonat/Documents/School/Spring 2021/CSCI404/Project2/Game.h
+
+C:/Users/jonat/Documents/School/Spring 2021/CSCI404/Project2/Game.h
+Board.h
+C:/Users/jonat/Documents/School/Spring 2021/CSCI404/Project2/Board.h
+
