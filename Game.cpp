@@ -94,37 +94,28 @@ int Game::oppositePlayer() {
 }
 
 void Game::interactive(bool computerNext) {
-    int count = 0;
-    for(int i = 0; i < 100; i++) {
-        std::cout << i << " ";
-        while (!gameBoard.endGame()) {
-            //gameBoard.print();
-            //std::cout << gameBoard.score(1) << "-" << gameBoard.score(2) << std::endl;
-            if (computerNext) {
-                gameBoard.makeMove(minimaxDecision(gameBoard, this->depth), currentPlayer);
-                computerNext = false;
-                currentPlayer = oppositePlayer();
-                gameBoard.save("computer.txt", currentPlayer);
-            } else {
-                int humanInput = -1;
-                do {
-                    /*if(humanInput != -1)
-                        std::cout << "Invalid move. Try again: " << std::endl;
-                    else
-                        std::cout << "Make a move (1-7): ";*/
-                    //std::cin >> humanInput;
-                    humanInput = rand() % 7 + 1;
-                } while (!gameBoard.makeMove(humanInput - 1, currentPlayer));
-                computerNext = true;
-                currentPlayer = oppositePlayer();
-                gameBoard.save("human.txt", currentPlayer);
-            }
+    while (!gameBoard.endGame()) {
+        gameBoard.print();
+        std::cout << gameBoard.score(1) << "-" << gameBoard.score(2) << std::endl;
+        if (computerNext) {
+            gameBoard.makeMove(minimaxDecision(gameBoard, this->depth), currentPlayer);
+            computerNext = false;
+            currentPlayer = oppositePlayer();
+            gameBoard.save("computer.txt", currentPlayer);
+        } else {
+            int humanInput = -1;
+            do {
+                if(humanInput != -1)
+                    std::cout << "Invalid move. Try again: " << std::endl;
+                else
+                    std::cout << "Make a move (1-7): ";
+                std::cin >> humanInput;
+            } while (!gameBoard.makeMove(humanInput - 1, currentPlayer));
+            computerNext = true;
+            currentPlayer = oppositePlayer();
+            gameBoard.save("human.txt", currentPlayer);
         }
-        if(gameBoard.score(1) > gameBoard.score(2))
-            count++;
-        gameBoard.clear();
     }
-    std::cout << count << std::endl;
 }
 
 void Game::one_move() {
