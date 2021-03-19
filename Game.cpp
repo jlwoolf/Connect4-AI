@@ -28,7 +28,8 @@ Game::Game(bool interactiveGame, const std::string& filename, bool computerStart
 }
 
 int Game::minimaxDecision(Board board, int depth) {
-    int utility = INT32_MIN, col = -1;
+    int utility = INT32_MIN;
+    std::vector<int> col;
     int alpha = INT32_MIN, beta = INT32_MAX;
     for(int i : order) {
         Board childBoard = board;
@@ -36,11 +37,14 @@ int Game::minimaxDecision(Board board, int depth) {
             int tempUtility = minValue(childBoard, depth - 1, alpha, beta);
             if(tempUtility > utility) {
                 utility = tempUtility;
-                col = i;
+                col.clear();
+                col.push_back(i);
+            } else if(tempUtility == utility) {
+                col.push_back(i);
             }
         }
     }
-    return col;
+    return col[rand() % col.size()];
 }
 
 int Game::minValue(Board board, int depth, int alpha, int beta) {
@@ -111,6 +115,7 @@ void Game::interactive(bool computerNext) {
                     std::cout << "Make a move (1-7): ";
                 std::cin >> humanInput;
             } while (!gameBoard.makeMove(humanInput - 1, currentPlayer));
+            std::cout << std::endl;
             computerNext = true;
             currentPlayer = oppositePlayer();
             gameBoard.save("human.txt", currentPlayer);

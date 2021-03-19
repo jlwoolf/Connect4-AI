@@ -6,6 +6,7 @@
 #define MINIMAX_GAME_H
 
 #include "Board.h"
+#include <vector>
 
 class Game {
 private:
