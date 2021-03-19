@@ -116,6 +116,8 @@ void Game::interactive(bool computerNext) {
             gameBoard.save("human.txt", currentPlayer);
         }
     }
+    gameBoard.print();
+    std::cout << gameBoard.score(1) << "-" << gameBoard.score(2) << std::endl;
 }
 
 void Game::one_move() {
