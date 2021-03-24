@@ -56,7 +56,7 @@ int Game::minValue(Board board, int depth, int alpha, int beta) {
         Board childBoard = board;
         if(childBoard.makeMove(i, oppositePlayer())) {
             utility = std::min(utility, maxValue(childBoard, depth - 1, alpha, beta));
-            if(utility <= beta) {
+            if(utility <= alpha) {
                 return utility;
             }
             beta = std::min(alpha, utility);
@@ -128,6 +128,8 @@ void Game::interactive(bool computerNext) {
 void Game::one_move() {
     gameBoard.print();
     std::cout << gameBoard.score(1) << "-" << gameBoard.score(2) << std::endl;
+    if(gameBoard.endGame())
+        return;
     gameBoard.makeMove(minimaxDecision(gameBoard, this->depth), currentPlayer);
     gameBoard.print();
     std::cout << gameBoard.score(1) << "-" << gameBoard.score(2) << std::endl;
